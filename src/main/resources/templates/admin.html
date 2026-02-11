@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,25 +44,25 @@
             <nav class="admin-nav">
                 <ul class="admin-nav-list">
                     <li class="admin-nav-item">
-                        <a th:href="@{/admin}" class="admin-nav-link active" data-section="dashboard">
+                        <a th:href="@{/dashboard}" class="admin-nav-link" th:classappend="${adminSection == 'dashboard'} ? 'active': '' " data-section="dashboard">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
-                        <a th:href="@{/admin}" class="admin-nav-link" data-section="product">
+                        <a th:href="@{/product}" class="admin-nav-link" th:classappend="${adminSection == 'product'} ? 'active': '' " data-section="product">
                             <i class="fas fa-box"></i>
                             <span>Produtos</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
-                        <a th:href="@{/admin}" class="admin-nav-link" data-section="order">
+                        <a th:href="@{/order}" class="admin-nav-link" th:classappend="${adminSection == 'order'} ? 'active': '' " data-section="order">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Pedidos</span>
                         </a>
                     </li>
                     <li class="admin-nav-item">
-                        <a th:href="@{/admin}" class="admin-nav-link" data-section="user">
+                        <a th:href="@{/user}" class="admin-nav-link" th:classappend="${adminSection == 'user'} ? 'active': '' " data-section="user">
                             <i class="fas fa-users"></i>
                             <span>Usuários</span>
                         </a>
@@ -75,7 +75,7 @@
         <main class="admin-main">
 
             <!-- Dashboard Section -->
-            <section id="dashboard-section" class="admin-section active">
+            <section id="dashboard-section" th:if="${adminSection == 'dashboard'}"  class="admin-section active">
                 <div class="admin-header-section">
                     <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
                     <p>Visão geral do sistema</p>
@@ -220,10 +220,10 @@
 
             <!-- Produtos Section -->
             <!-- ⚠️ THYMELEAF: Remover style="display:none" e adicionar th:if="${adminSection == 'product'}" -->
-            <section id="produtos-section" class="admin-section" style="display:none">
+            <section id="produtos-section" th:if="${adminSection == 'product'}" class="admin-section active">
                 <div class="admin-header-section">
                     <h2><i class="fas fa-box"></i> Gestão de Produtos</h2>
-                    <a th:href="@{/admin}" class="btn btn-primary" id="add-produto-btn">
+                    <a th:href="@{/product}" class="btn btn-primary" id="add-produto-btn">
                         <i class="fas fa-plus"></i> Adicionar Produto
                     </a>
                 </div>
@@ -359,7 +359,7 @@
 
             <!-- Categorias Section -->
             <!-- ⚠️ THYMELEAF: Remover style="display:none" e adicionar th:if="${adminSection == 'category'}" -->
-            <section id="categorias-section" class="admin-section" style="display:none">
+            <section id="categorias-section" th:if="${adminSection == 'category'}" class="admin-section active">
                 <div class="admin-header-section">
                     <h2><i class="fas fa-tags"></i> Gestão de Categorias</h2>
                     <button class="btn btn-primary" id="add-categoria-btn">
@@ -422,7 +422,7 @@
 
             <!-- Usuários Section -->
             <!-- ⚠️ THYMELEAF: Remover style="display:none" e adicionar th:if="${adminSection == 'user'}" -->
-            <section id="usuarios-section" class="admin-section" style="display:none">
+            <section id="usuarios-section" th:if="${adminSection == 'user'}"  class="admin-section active">
                 <div class="admin-header-section">
                     <h2><i class="fas fa-users"></i> Gestão de Usuários</h2>
                     <a th:href="@{/admin}" class="btn btn-primary" id="add-usuario-btn">
@@ -587,7 +587,7 @@
 
             <!-- Pedidos Section -->
             <!-- ⚠️ THYMELEAF: Remover style="display:none" e adicionar th:if="${adminSection == 'order'}" -->
-            <section id="pedidos-section" class="admin-section" style="display:none">
+            <section id="pedidos-section" th:if="${adminSection == 'order'}" class="admin-section active">
                 <div class="admin-header-section">
                     <h2><i class="fas fa-shopping-cart"></i> Gestão de Pedidos</h2>
                 </div>
