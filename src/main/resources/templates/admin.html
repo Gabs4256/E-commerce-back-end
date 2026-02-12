@@ -229,15 +229,15 @@
                 </div>
 
                 <!-- Products Form -->
-                <form id="produto-form" class="form-grid two-columns" action="admin.html" method="POST">
+                <form id="produto-form" class="form-grid two-columns" th:action="@{/product/save}" method="POST" th:object="${product}">
                     <input type="hidden" name="id" value="">
                     <div class="form-group">
                         <label for="produto-nome">Nome do Produto</label>
-                        <input type="text" id="produto-nome" name="name" required>
+                        <input type="text" id="produto-nome" th:field="*{name}" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="produto-categoria">Categoria</label>
-                        <select id="produto-categoria" name="category" required>
+                        <select id="produto-categoria" th:field="*{category}" name="category" required>
                             <option value="">Selecione uma categoria</option>
                             <option value="ELECTRONICS">Eletrônicos</option>
                             <option value="CLOTHING">Roupas e Acessórios</option>
@@ -250,18 +250,18 @@
                     </div>
                     <div class="form-group">
                         <label for="produto-preco">Preço</label>
-                        <input type="number" id="produto-preco" name="price" step="0.01" value="0" required>
+                        <input type="number" id="produto-preco" th:field="*{price}" name="price" step="0.01" value="0" required>
                     </div>
                     <div class="form-group">
                         <label for="produto-status">Status</label>
-                        <select id="produto-status" name="status" required>
+                        <select id="produto-status" th:field="*{state}" name="status" required>
                             <option value="ativo">Ativo</option>
                             <option value="inativo">Inativo</option>
                         </select>
                     </div>
                     <div class="form-group full-width">
                         <label for="produto-descricao">Descrição</label>
-                        <textarea id="produto-descricao" name="description" rows="4" required></textarea>
+                        <textarea id="produto-descricao" th:field="*{description}" name="description" rows="4" required></textarea>
                     </div>
 
                     <div class="form-actions">
@@ -307,50 +307,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Notebook Dell Inspiron 15</td>
-                                <td>Eletrônicos</td>
-                                <td>R$ 3.499,00</td>
-                                <td>ativo</td>
-                                <td class="action-buttons">
-                                    <a th:href="@{/admin}" class="btn-icon btn-edit" title="Editar">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a th:href="@{/admin}" class="btn-icon btn-delete" title="Excluir">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Mouse Gamer RGB</td>
-                                <td>Eletrônicos</td>
-                                <td>R$ 149,90</td>
-                                <td>ativo</td>
-                                <td class="action-buttons">
-                                    <a th:href="@{/admin}" class="btn-icon btn-edit" title="Editar">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a th:href="@{/admin}" class="btn-icon btn-delete" title="Excluir">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Camiseta Algodão Premium</td>
-                                <td>Roupas e Acessórios</td>
-                                <td>R$ 79,90</td>
-                                <td>inativo</td>
-                                <td class="action-buttons">
-                                    <a th:href="@{/admin}" class="btn-icon btn-edit" title="Editar">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a th:href="@{/admin}" class="btn-icon btn-delete" title="Excluir">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
+                            <tr th:each="product : ${products}">
+                                <td th:text="${product.id}"></td>
+                                <td th:text="${product.name}"></td>
+                                <td th:text="${product.category}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td th:text="${product.state}"></td>
                             </tr>
                         </tbody>
                     </table>
