@@ -186,7 +186,7 @@
 
             <!-- Produtos Delete Confirmation Section -->
             <!-- ⚠️ THYMELEAF: Remover style="display:none" e adicionar th:if="${adminSection == 'productDelete'}" -->
-            <section id="delete-confirmation" class="admin-section" style="display:none">
+            <section id="delete-confirmation" th:if="${adminSection == 'productDelete'}" class="admin-section">
                 <div class="admin-card">
                     <div class="card-header">
                         <h3>
@@ -201,16 +201,16 @@
                             </div>
                             <h2>Confirmar Exclusão</h2>
                             <p>Tem certeza que deseja excluir o produto:</p>
-                            <h4 class="product-name-highlight">Notebook Dell Inspiron 15</h4>
+                            <h4 th:text="${product.name}" class="product-name-highlight"></h4>
                             <p class="warning-text">Esta ação não poderá ser desfeita.</p>
                         </div>
                     </div>
                     <div class="card-footer delete-footer" style="display: flex; justify-content: center; padding-bottom: 2rem;">
                         <div class="form-actions" style="gap: 1rem;">
-                            <a th:href="@{/admin}" class="btn btn-outline">
+                            <a th:href="@{/product}" class="btn btn-outline">
                                 <i class="fas fa-times"></i> Cancelar
                             </a>
-                            <a th:href="@{/admin}" class="btn btn-danger">
+                            <a th:href="@{/product/delete/confirmation/{id}(id=${product.id})}" class="btn btn-danger">
                                 <i class="fas fa-trash"></i> Excluir
                             </a>
                         </div>
@@ -230,7 +230,7 @@
 
                 <!-- Products Form -->
                 <form id="produto-form" class="form-grid two-columns" th:action="@{/product/save}" method="POST" th:object="${product}">
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" th:field="*{id}">
                     <div class="form-group">
                         <label for="produto-nome">Nome do Produto</label>
                         <input type="text" id="produto-nome" th:field="*{name}" name="name" required>
@@ -313,6 +313,14 @@
                                 <td th:text="${product.category}"></td>
                                 <td th:text="${product.price}"></td>
                                 <td th:text="${product.state}"></td>
+                                <td class="action-buttons">
+                                    <a th:href="@{/product/edit/{id}(id=${product.id})}" class="btn-icon btn-edit" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a th:href="@{/product/delete/{id}(id=${product.id})}" class="btn-icon btn-delete" title="Excluir">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

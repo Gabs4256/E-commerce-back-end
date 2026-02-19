@@ -1,4 +1,4 @@
-package com.ecommerce.Controller;
+package com.ecommerce.controller;
 
 
 import org.springframework.stereotype.Controller;
@@ -6,11 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class DashboardController {
+public class UserController {
 
-    @GetMapping("/dashboard")
+    @GetMapping("/user")
     public String dashboard(Model model) {
-        model.addAttribute("adminSection", "dashboard");
+        model.addAttribute("adminSection", "user");
         return "admin";
     }
 }
