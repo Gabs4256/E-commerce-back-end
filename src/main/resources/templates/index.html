@@ -151,14 +151,16 @@
 
             <!-- Categories Filter -->
             <div class="categories-filter">
-                <a th:href="@{/}" class="category-btn active" data-category="all">Todos</a>
-                <a href="index.html?category=ELECTRONICS" class="category-btn"><span>Eletrônicos</span></a>
-                <a href="index.html?category=CLOTHING" class="category-btn"><span>Roupas</span></a>
-                <a href="index.html?category=HOME_GARDEN" class="category-btn"><span>Casa e Jardim</span></a>
-                <a href="index.html?category=SPORTS" class="category-btn"><span>Esportes</span></a>
-                <a href="index.html?category=TOYS" class="category-btn"><span>Brinquedos</span></a>
-                <a href="index.html?category=BEAUTY" class="category-btn"><span>Beleza</span></a>
-                <a href="index.html?category=AUTOMOTIVE" class="category-btn"><span>Automotivo</span></a>
+                <a th:href="@{/}" class="category-btn"
+                   th:classappend="${categoriesFilter == 'ALL'} ? ' active' : '' "
+                   data-category="all">Todos</a>
+                <a th:href="@{/?category={category}(category=${category})}"
+                   class="category-btn"
+                   th:classappend="${categoriesFilter == category} ? ' active ' : '' "
+                   th:each="category : ${categories}">
+                    <span th:text="${category.description}"></span>
+                </a>
+
             </div>
 
             <!-- Products Grid -->

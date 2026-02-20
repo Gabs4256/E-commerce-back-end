@@ -1,5 +1,6 @@
 package com.ecommerce.controller;
 
+import com.ecommerce.enums.Category;
 import com.ecommerce.model.Product;
 import com.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class ProductController {
         }else {
             model.addAttribute("product", new Product());
         }
+        model.addAttribute("categories", Category.values());
         model.addAttribute("products", productRepository.findAll());
         return "admin";
     }

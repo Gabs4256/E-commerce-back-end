@@ -1,10 +1,8 @@
 package com.ecommerce.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ecommerce.enums.Category;
+import jakarta.persistence.*;
 
 @Entity
 public class Product {
@@ -12,7 +10,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String category;
+
+    @Enumerated(EnumType.STRING)   //TYPE SAFET
+    private Category category;
+
     private Double price;
     private String state;
     private String description;
@@ -36,13 +37,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    public void setCategory(Category category) {
+        this.category = category;}
 
     public Double getPrice() {
         return price;
